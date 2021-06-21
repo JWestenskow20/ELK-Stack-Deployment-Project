@@ -1,11 +1,17 @@
-# ELK-Stack-Project
 # Automated ELK Stack Deployment
 The files in this repository were used to configure the network depicted below.
 Note: The following image link needs to be updated. Replace diagram_filename.png with the name of your diagram image file.
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the **yml and config** file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the **_yml and config_** file may be used to install only certain pieces of it, such as Filebeat.
 
-TODO: Enter the playbook file.
+* [Ansible Playbook](https://www.google.com "Google's Homepage")
+* [Ansible Hosts](https://www.google.com "Google's Homepage")
+* [Ansible Configuration](https://www.google.com "Google's Homepage")
+* [Ansible ELK Installation and VM Configuration](https://www.google.com "Google's Homepage")
+* [Ansible Filebeat Config](https://www.google.com "Google's Homepage")
+* [Ansible Filebeat Playbook](https://www.google.com "Google's Homepage")
+* [Ansible Metricbeat Config](https://www.google.com "Google's Homepage")
+* [Ansible Metricbeat Playbook](https://www.google.com "Google's Homepage")
 
 This document contains the following details:
 
