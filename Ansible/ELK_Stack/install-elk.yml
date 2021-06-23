@@ -38,6 +38,7 @@
         name: elkstack
         image: sebp/elk
         state: started
-        published_ports: 5601:5601
-        published_ports: 9200:9200
-        published_ports: 5044:5044
+        published_ports:
+          - 5601:5601
+          - 9200:9200
+          - 5044:5044
