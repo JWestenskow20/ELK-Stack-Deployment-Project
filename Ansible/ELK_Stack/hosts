@@ -33,15 +33,19 @@
 # List the IP Addresses of your webservers
 # You should have at least 2 IP addresses
 
-10.1.0.5 ansible_python_interpreter=/usr/bin/python3  ## Web1
-10.1.0.6 ansible_python_interpreter=/usr/bin/python3  ## Web2
-10.1.0.7 ansible_python_interpreter=/usr/bin/python3  ## DVWA-VM3
+## Web-1
+10.1.0.5 ansible_python_interpreter=/usr/bin/python3
+## Web2
+10.1.0.6 ansible_python_interpreter=/usr/bin/python3
+## DVWA-VM3
+10.1.0.7 ansible_python_interpreter=/usr/bin/python3
 
 # List the IP address of your ELK server
 # There should only be one IP address
 
 [elk]
-10.2.0.4 ansible_python_interpreter=/usr/bin/python3  ## ELKserver
+## ELKserver
+10.2.0.4 ansible_python_interpreter=/usr/bin/python3
 
 # Ex 3: A collection of database servers in the 'dbservers' group
 
