@@ -1,34 +1,40 @@
 ###############################
-### Ketan Vithal Patel                     ###
-### June 16, 2021                               ###
-### Cybersecurity Boot Camp      ###
+### Ketan Vithal Patel      ###
+### June 16, 2021           ###
+### Cybersecurity Boot Camp ###
 ###############################
 
 ## filebeat_playbook.yml File:
 
 
 ---
-- name: installing and launching filebeat
+- name: Installing and Launching Filebeat
   hosts: webservers
   become: true
   tasks:
 
+  # Use command module
   - name: download filebeat deb
     command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.7.1-amd64.deb
 
-  - name: install filebeat deb
+  # Use command module
+  - name: Install filebeat deb
     command: dpkg -i filebeat-7.7.1-amd64.deb
 
-  - name: drop in filebeat.yml
+  # Use copy module
+  - name: Drop in filebeat.yml
     copy:
-      src: /etc/ansible/roles/files/filebeat-configuration.yml
+      src: /etc/ansible/roles/files/filebeat-config.yml
       dest: /etc/filebeat/filebeat.yml
 
-  - name: enable and configure system module
+  # Use command module
+  - name: Enable and Configure System Module
     command: filebeat modules enable system
 
-  - name: setup filebeat
+  # Use command module
+  - name: Setup Filebeat
     command: filebeat setup
 
-  - name: start filebeat service
+  # Use command module
+  - name: Start Filebeat Service
     command: service filebeat start
