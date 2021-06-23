@@ -4,20 +4,18 @@
 # Automated ELK Stack Deployment
 The files in this repository were used to configure the network depicted below.
 
-**Note:** The following image link needs to be updated. Replace diagram_filename.png with the name of your diagram image file.
-
 ![Network Diagram](/Diagrams/KVP_Cloud_Security_with_ELK_Deployment_Diagram.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the **_yml and config_** file may be used to install only certain pieces of it, such as Filebeat.
 
-* [Ansible Playbook](https://www.google.com "Google's Homepage")
-* [Ansible Hosts](https://www.google.com "Google's Homepage")
-* [Ansible Configuration](https://www.google.com "Google's Homepage")
-* [Ansible ELK Installation and VM Configuration](https://www.google.com "Google's Homepage")
-* [Ansible Filebeat Config](https://www.google.com "Google's Homepage")
-* [Ansible Filebeat Playbook](https://www.google.com "Google's Homepage")
-* [Ansible Metricbeat Config](https://www.google.com "Google's Homepage")
-* [Ansible Metricbeat Playbook](https://www.google.com "Google's Homepage")
+* [My First Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Docker/pentest.yml "My First Playbook")
+* [Hosts](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/ELK_Stack/hosts "Hosts File")
+* [Ansible Configuration](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/ELK_Stack/ansible.cfg "Ansible Configuration File")
+* [Ansible ELK Installation and VM Configuration](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/ELK_Stack/install-elk.yml "ELK Installation and VM Configuration file")
+* [Filebeat Config](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_config.yml "Filebeat Configuration File")
+* [Filebeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_playbook.yml "Filebeat Playbook")
+* [Metricbeat Config](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Metricbeat/metricbeat-config.yml "Metricbeat Configuration File")
+* [Metricbeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Metricbeat/metricbeat-playbook.yml "Metricbeat Playbook")
 
 This document contains the following details:
 
@@ -141,7 +139,7 @@ The playbook implements the following tasks:
            restart_policy: always
       ```
   - Published ports 5044, 5601 and 9200 were made available
-  -   ```yaml
+      ```yaml
            published_ports:
              -  5601:5601
              -  9200:9200
@@ -149,8 +147,8 @@ The playbook implements the following tasks:
       ```
 
 The following screenshot displays the result of running docker ps after successfully configuring the ELK instance.
-Note: The following image link needs to be updated. Replace docker_ps_output.png with the name of your screenshot image file.
 
+![DockerPS](/Images/Docker_PS_Output/docker_ps_output_ELKserver.PNG)
 
 ## Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -178,7 +176,7 @@ SSH into the control node and follow the steps below:
 
 Copy the **_yml_** file to **_ansible folder._**
 Update the **_config_** file to include **_remote users and ports._**
-Run the playbook, and navigate to ____ to check that the installation worked as expected.
+Run the playbook, and navigate to **_Kibana ((Your IP Address):5601_)** to check that the installation worked as expected.
 
 TODO: Answer the following questions to fill in the blanks:
 
