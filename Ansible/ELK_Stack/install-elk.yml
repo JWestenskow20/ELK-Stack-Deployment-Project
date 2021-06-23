@@ -11,38 +11,49 @@
     remote_user: elk
     become: True
     tasks:
- 
-    # Use command module
-    - name: change the memory on the elk vm
-      command: sysctl -w vm.max_map_count=262144
 
     # Use apt module
-    - name: install docker.io
+    - name: Install docker.io
       apt:
+        update_cache: yes
         force_apt_get: yes
         name: docker.io
         state: present
 
     # Use apt module
-    - name: install python-pip
+    - name: Install python-pip
       apt:
         force_apt_get: yes
-        name: python-pip
+        name: python3-pip
         state: present
 
     # Use pip module
-    - name: install docker python module
+    - name: Install Docker Python module
       pip:
         name: docker
         state: present
 
+    # Use command module
+    - name: Change the Memory on the ELK VM
+      command: sysctl -w vm.max_map_count=262144
+
+    # Use sysctl module
+    - name: Use more memory
+      sysctl:
+        name: vm.max_map_count
+        value: "262144"
+        state: present
+        reload: yes
+
     # Use docker_container module
-    - name: download and launch a docker elk stack
+    - name: Download and Launch a Docker ELK Stack
       docker_container:
         name: elkstack
         image: sebp/elk
         state: started
+        restart_policy: always
+        # Please list the ports that ELK runs on
         published_ports:
-          - 5601:5601
-          - 9200:9200
-          - 5044:5044
+          -  5601:5601
+          -  9200:9200
+          -  5044:5044
