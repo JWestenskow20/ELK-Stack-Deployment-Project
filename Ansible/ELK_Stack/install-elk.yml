@@ -1,14 +1,13 @@
-
+---
 ###############################
 ### Ketan Vithal Patel      ###
 ### June 16, 2021           ###
 ### Cybersecurity Boot Camp ###
 ###############################
 
----
-  - name: My ELK Stack
-    hosts: elkservers
-    remote_user: elk
+  - name: Configure ELK VM with Docker
+    hosts: elk
+    remote_user: ansible
     become: True
     tasks:
 
@@ -34,21 +33,25 @@
         state: present
 
     # Use command module
-    - name: Change the Memory on the ELK VM
+    - name: Increase the Virtual Memory on the ELK VM
       command: sysctl -w vm.max_map_count=262144
+    
+    # Use shell module
+    - name: Increase the Virtual Memory on the restart
+      shell: echo "vm.max_map_count=262144" >> /etc/sysctl.conf
 
     # Use sysctl module
     - name: Use more memory
-      sysctl:
+      ansible.posix.sysctl:
         name: vm.max_map_count
         value: "262144"
         state: present
         reload: yes
 
     # Use docker_container module
-    - name: Download and Launch a Docker ELK Stack
+    - name: Download and Launch a Docker ELK Container
       docker_container:
-        name: elkstack
+        name: elk
         image: sebp/elk
         state: started
         restart_policy: always
@@ -57,3 +60,9 @@
           -  5601:5601
           -  9200:9200
           -  5044:5044
+
+    # Use systemd module
+    - name: Enable service Docker on Boot
+      systemd:
+        name: docker
+        enabled: yes
