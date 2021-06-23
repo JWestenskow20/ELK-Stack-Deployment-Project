@@ -15,23 +15,27 @@
     # Use command module
     - name: change the memory on the elk vm
       command: sysctl -w vm.max_map_count=262144
+
     # Use apt module
     - name: install docker.io
       apt:
         force_apt_get: yes
         name: docker.io
         state: present
+
     # Use apt module
     - name: install python-pip
       apt:
         force_apt_get: yes
         name: python-pip
         state: present
+
     # Use pip module
     - name: install docker python module
       pip:
         name: docker
         state: present
+
     # Use docker_container module
     - name: download and launch a docker elk stack
       docker_container:
