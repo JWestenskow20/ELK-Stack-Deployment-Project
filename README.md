@@ -150,7 +150,6 @@ The following screenshot displays the result of running docker ps after successf
 
 ![DockerPS](/Images/Docker_PS_Output/docker_ps_output_ELKserver.PNG)
 
-
 ## Target Machines & Beats
 This ELK server is configured to monitor the following machines:
 
@@ -163,23 +162,26 @@ We have installed the following Beats on these machines:
 
 - Filebeat
   - [Filebeat Module Status Screenshot](/Images/Docker_PS_Output/Filebeat_data_successful.PNG)
-  - [Filebeat Module Kibana Dashboard Screenshot](/Images/Docker_PS_Output/Filebeat_System_Syslog_dashboard.PNG)
 
 - Metricbeat
   - [Metricbeat Module Status Screenshot](/Images/Docker_PS_Output/Metricbeat_data_successful.PNG)
-  - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Images/Docker_PS_Output/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
-    - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_Web-1_metrics.PNG)
-    - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_Web-2_metrics.PNG)
-    - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
 
 These Beats allow us to collect the following information from each machine:
 
-- In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., Winlogbeat collects Windows logs, which we use to track user logon events, etc.
   - Filebeat will be used to collect log files from very specific files such as Apache, Microsft Azure tools and web servers, MySQL databases.
+    - [Filebeat Module Kibana Dashboard Screenshot](/Images/Docker_PS_Output/Filebeat_System_Syslog_dashboard.PNG) 
+
   - Metericbeat will be used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats.
+    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Images/Docker_PS_Output/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_Web-1_metrics.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_Web-2_metrics.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
 
 ## Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned:
+
+- Verify the Public IP address to see if it has changed. [What Is My IP?](https://www.whatismyip.com/)
+- If changed then update the Security Rules that uses the My Public IPv4
 
 SSH into the control node and follow the steps below:
 
@@ -188,10 +190,59 @@ SSH into the control node and follow the steps below:
 - Run the playbook, and navigate to **_Kibana ((Your IP Address):5601_)** to check that the installation worked as expected.
 
 ### **_For Filebeat_**
+- Download Filebeat playbook usng this command: 
+  - `curl -L -O https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/files/filebeat-config.yml`
+- Copy the **_[Filebeat Config](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_config.yml "Filebeat Configuration File")_** file to **_/etc/ansible_**
+- Update the **_filebeat-config.yml_** file to include the **_ELK private IP 10.2.0.4_** as below from root@9ddf6fe7eb3f:~# `nano /etc/ansible/filebeat-config.yml`
+```bash
+output.elasticsearch:
+  # Boolean flag to enable or disable the output module.
+  #enabled: true
+
+  # Array of hosts to connect to.
+  # Scheme and port can be left out and will be set to the default (http and 9200)
+  # In case you specify and additional path, the scheme is required: http://localhost:9200/path
+  # IPv6 addresses should always be defined as: https://[2001:db8::1]:9200
+  hosts: ["10.2.0.4:9200"]
+  username: "elastic"
+  password: "changeme" # TODO: Change this to the password you set
+
+# Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
+# This requires a Kibana endpoint configuration.
+setup.kibana:
+  host: "10.2.0.4:5601" 
+# TODO: Change this to the IP address of your ELK server
+```
+- Run the playbook using this command `ansible-playbook filebeat-playbook.yml` and navigate to [Kibana](http://20.84.136.248:5601/app/kibana) > Logs : Add log data > System logs > 5:Module Status > Check data_ to check that the installation worked as expected.
+
+### **_For Metricbeat_**
+- Download Metricbeat playbook using this command:
+  - `curl -L -O https://gist.githubusercontent.com/slape/58541585cc1886d2e26cd8be557ce04c/raw/0ce2c7e744c54513616966affb5e9d96f5e12f73/metricbeat > /etc/ansible/files/metricbeat-config.yml`
+Copy the **_[Metricbeat Config](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Metricbeat/metricbeat-config.yml "Metricbeat Configuration File")_** file to **_/etc/ansible_**
+- Update the **_metricbeat-config.yml_** file to include the **_ELK private IP 10.2.0.4_** as below from root@9ddf6fe7eb3f:~# `nano /etc/ansible/metricbeat-config.yml`
+```bash
+#============================== Kibana =====================================
+
+# Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
+# This requires a Kibana endpoint configuration.
+setup.kibana:
+  host: "10.2.0.4:5601"
+  
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  # TODO: Change the hosts IP address to the IP address of your ELK server
+  # TODO: Change password from `changem` to the password you created
+  hosts: ["10.2.0.4:9200"]
+  username: "elastic"
+  password: "changeme"
+
+```
+
+
 - _Which file is the playbook?_
   - **_[Filebeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_playbook.yml "Filebeat Playbook")_**
 - _Where do you copy it?_
-  - **_/etc/ansible/roles/_**
+  - **_/etc/ansible/_**
 - _Which file do you update to make Ansible run the playbook on a specific machine?_
   - 
 - _How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
@@ -199,13 +250,13 @@ SSH into the control node and follow the steps below:
 - _Which URL do you navigate to in order to check that the ELK server is running?_
   - 
 
-### **_For Metricbeat_**
+**_For Metricbeat_**
 - _Which file is the playbook?_
   - **_[Metricbeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Metricbeat/metricbeat-playbook.yml "Metricbeat Playbook")_**
 - _Where do you copy it?_
   - **_/etc/ansible/roles/_**
 - _Which file do you update to make Ansible run the playbook on a specific machine?_
-  - 
+  - **_
 - _How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
   - 
 - _Which URL do you navigate to in order to check that the ELK server is running?_
