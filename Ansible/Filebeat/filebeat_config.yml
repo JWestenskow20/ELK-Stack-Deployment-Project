@@ -9,11 +9,11 @@
 ### /etc/ansible/files# curl -L -O https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/files/filebeat-config.yml
 ### change for Elastic ---- hosts: ["10.2.0.4:9200"]
 ### do not change  username: "elastic"
-### do not change the password ---  password: "changeme
+### do not change the password ---  password: "changeme"
 ### do not change for Kibana setup.kibana:
 ### change the IP for ELKserver  host: "10.2.0.4:5601"
 
-## filebeat_configuration.yml File:
+## filebeat_config.yml File:
 
 ######################## Filebeat Configuration ############################
 # This file is a full configuration example documenting all non-deprecated
@@ -2080,4 +2080,3 @@ logging.files:
 
 # This allows to enable 6.7 migration aliases
 #migration.6_to_7.enabled: false
-� 2021 GitHub, Inc.
