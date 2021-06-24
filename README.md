@@ -265,11 +265,13 @@ output.elasticsearch:
 
 ### Install Filebeat onto VM's
 1. Login to Kibana > Logs : Add log data > System logs > DEB > Getting started
-2. Copy: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+2. Copy: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb  
+   (Download the Filebeat to the VM) 
 
 ### Install Metricbeat onto VM's
 1. Login to Kibana > Add Metric Data > Docker Metrics > DEB > Getting Started
 2. Copy: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.deb  
+   (Download the Metricbeat to the VM)   
 
 - _Answer the following questions to fill in the blanks:_  
 
