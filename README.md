@@ -189,9 +189,13 @@ SSH into the control node and follow the steps below:
 - Update the **_config_** file to include **_remote users and ports._**
 - Run the playbook, and navigate to **_Kibana ((Your IP Address):5601_)** to check that the installation worked as expected.
 
+### **_For ELK VM Configuration:_**
+- Copy the [ELK Installation and VM Configuration ](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/ELK_Stack/install-elk.yml) 
+- Run the playbook using this command :  `ansible-playbook /etc/ansible/install-elk.yml`  
+
 ### **_For Filebeat_**
 - Download Filebeat playbook usng this command: 
-  - `curl -L -O https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/files/filebeat-config.yml`
+  - `curl -L -O https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/filebeat-config.yml`
 - Copy the **_[Filebeat Config](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_config.yml "Filebeat Configuration File")_** file to **_/etc/ansible_**
 - Update the **_filebeat-config.yml_** file to include the **_ELK private IP 10.2.0.4_** as below from root@9ddf6fe7eb3f:~# `nano /etc/ansible/filebeat-config.yml`
 ```bash
@@ -244,10 +248,20 @@ output.elasticsearch:
       - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-2_metrics.PNG)
       - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
 
+### Install Filebeat onto VM's
+1. Login to Kibana > Logs : Add log data > System logs > DEB > Getting started
+2. Copy: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+
+### Install Metricbeat onto VM's
+1. Login to Kibana > Add Metric Data > Docker Metrics > DEB > Getting Started
+2. Copy: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.deb  
+
 - _Answer the following questions to fill in the blanks:_  
+
 - _Which file is the playbook?_
-  - **_[Filebeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_playbook.yml "Filebeat Playbook")_**  
-- _Where do you copy it?_
+  - For Ansible create **_[My First Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Docker/pentest.yml "My First Playbook")_**
+  - For Filebeat create **_[Filebeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_playbook.yml "Filebeat Playbook")_**
+  - For Metricbeat create **_[Metricbeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Metricbeat/metricbeat-playbook.yml "Metricbeat Playbook")_** - _Where do you copy it?_
   - **_/etc/ansible/_**  
 - _Which file do you update to make Ansible run the playbook on a specific machine?_
   - **_/etc/ansible/hosts file (IP of the Virtual Machines)._**  
@@ -258,12 +272,29 @@ output.elasticsearch:
 
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.  
 
-## Additional Notes:  
-- Make sure all the folders are organized for the Ansible Machine as following:
-- `etc # should already exist.
-  ----> ansible # should already exist.
-  ---------> ansible.cfg # should already exist.
-  ---------> hosts # should already exist.
-  ---------> roles # this is a new directory that will contain your ansible playbooks.
-  --------------> files # this is a new directory that will contain the configuration files we pass to you.`
+- The specific commands the user will need to run in order to download the playbook and configuration files, update the files, etc:  
 
+|            COMMAND                               | PURPOSE                                          |
+|--------------------------------------------------|--------------------------------------------------|                         
+|`sudo apt-get update` 				                     |  this will update all packages                   |         
+|`sudo apt install docker.io`				               |  install docker application		                  |   
+|`sudo service docker start`				               |  start the docker application                    |
+|`sudo systemctl status docker`				             |  status of the docker application                |
+|`sudo systemctl start docker`                     |  start the docker service                        |
+|`sudo docker pull cyberxsecurity/ansible`	       |  pull the docker container file                  |
+|`sudo docker run -ti cyberxsecurity/ansible bash` |  run and create a docker container image         |
+|`sudo docker start <image-name>`                  |  starts the image specified                      |
+|`sudo docker ps -a`                               |  list all active/inactive containers             |
+|`sudo docker attach <image-name>`                 |  effectively sshing into the ansible |container  |
+|`ssh-keygen`                                      |  create a ssh key                                |
+|`ansible -m ping all`                             |  check the connection of ansible containers      |
+|`ssh azadmin@Jump-Box-Provisioner IP address`     |  to log into the Jump-Box-Provisioner            |
+|`ssh ansible@Web-1 IP address`                    |  to log into the Web-1 VM                        |
+|`ssh ansible@Web-2 IP address`                    |  to log into the Web-2 VM                        |
+|`ssh ansible@DVWA-VM3 IP address`                 |  to log into the DVWA-VM3 VM                     |
+|`ssh ansible@ELKserver IP address`                |  to log into the ELKserver VM                    |
+|`nano /etc/ansible/ansible.cfg`                   |  to edit the ansible.cfg file                    |
+|`nano /etc/ansible/hosts`                         |  to edit the hosts file                          |
+|`nano /etc/ansible/pentest.yml`                   |  to edit the My-Playbook                         |
+|`curl -L -O [location of the file on the web]`    |  to download a file from the web                 |
+|`dpkg -i [filename]`                              |  to install the file i.e. (filebeat & metricbeat)|
