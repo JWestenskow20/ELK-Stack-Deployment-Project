@@ -27,6 +27,8 @@ This document contains the following details:
   - Machines Being Monitored
 - How to Use the Ansible Build
 
+-------------------------------------------------------------------------------------------------------------------------------------------
+
 ## Description of the Topology  
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
@@ -56,6 +58,9 @@ The configuration details of each machine may be found below.
 | DVWA-VM3          | UbuntuServer    | 10.1.0.7 / 40.114.124.38 | Linux              |
 | ELKserver         | UbuntuServer    | 10.2.0.4 / 20.84.136.248 | Linux              |
 
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
 ## Access Policies  
 
 The machines on the internal network are not exposed to the public Internet.
@@ -78,6 +83,9 @@ A summary of the access policies in place can be found in the table below.
 | Web-2              | No                    | 10.1.0.4 on SSH 22                      |
 | DVWA-VM3           | No                    | 10.1.0.4 on SSH 22                      |
 | ELKserver          | No                    | Workstation MY Public IP using TCP 5601 |
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Elk Configuration  
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
@@ -164,6 +172,8 @@ Web-2
 DVWA-VM3
 --------
 ![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_DVWA-VM3.PNG "DVWA-VM3")  
+
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Target Machines & Beats  
 This ELK server is configured to monitor the following machines:
@@ -286,6 +296,8 @@ output.elasticsearch:
   - **_I have specified two separate groups in the etc/ansible/hosts file. One of the group will be webservers which has the IPs of the 3 VMs that I will install Filebeat to. The other group is named ELKserver which will have the IP of the VM I will install ELK to._**  
 - _Which URL do you navigate to in order to check that the ELK server is running?_
   - **_http://20.84.136.248:5601//app/kibana_**
+
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.  
 
