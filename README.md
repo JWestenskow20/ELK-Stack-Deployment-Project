@@ -298,3 +298,5 @@ As a **Bonus**, provide the specific commands the user will need to run to downl
 |`nano /etc/ansible/pentest.yml`                   |  to edit the My-Playbook                         |
 |`curl -L -O [location of the file on the web]`    |  to download a file from the web                 |
 |`dpkg -i [filename]`                              |  to install the file i.e. (filebeat & metricbeat)|
+|`ansible-playbook [location][filename]`           |  to run the playbook                             |
+
