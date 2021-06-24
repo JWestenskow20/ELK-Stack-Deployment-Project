@@ -1,7 +1,7 @@
-### KEtaN V. Patel -- ELK Stack Project
-##### _June 16, 2021 -- UofT Cybersecurity - Boot Camp_
+### KEtaN V. Patel -- ELK Stack Project  
+#### _June 16, 2021 -- UofT Cybersecurity - Boot Camp_  
 
-# Automated ELK Stack Deployment
+# Automated ELK Stack Deployment  
 The files in this repository were used to configure the network depicted below.
 
 ![Network Diagram](/Diagrams/KVP_Cloud_Security_with_ELK_Deployment_Diagram.png)
@@ -26,7 +26,7 @@ This document contains the following details:
   - Machines Being Monitored
 - How to Use the Ansible Build
 
-### Description of the Topology
+## Description of the Topology  
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 Load balancing ensures that the application will be highly **_functional and available_**, in addition to restricting **_traffic_** to the network.
@@ -55,7 +55,7 @@ The configuration details of each machine may be found below.
 | DVWA-VM3          | UbuntuServer    | 10.1.0.7 / 40.114.124.38 | Linux              |
 | ELKserver         | UbuntuServer    | 10.2.0.4 / 20.84.136.248 | Linux              |
 
-### Access Policies
+## Access Policies  
 
 The machines on the internal network are not exposed to the public Internet.
 
@@ -78,7 +78,7 @@ A summary of the access policies in place can be found in the table below.
 | DVWA-VM3           | No                    | 10.1.0.4 on SSH 22                      |
 | ELKserver          | No                    | Workstation MY Public IP using TCP 5601 |
 
-## Elk Configuration
+## Elk Configuration  
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
 
 - What is the main advantage of automating configuration with Ansible?
@@ -146,11 +146,11 @@ The playbook implements the following tasks:
              -  5044:5044   
       ```
 
-The following screenshot displays the result of running docker ps after successfully configuring the ELK instance.
+The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
 ![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_ELKserver.PNG)
 
-## Target Machines & Beats
+## Target Machines & Beats  
 This ELK server is configured to monitor the following machines:
 
 - List the IP addresses of the machines you are monitoring
@@ -161,23 +161,23 @@ This ELK server is configured to monitor the following machines:
 We have installed the following Beats on these machines:
 
 - Filebeat
-  - [Filebeat Module Status Screenshot](/Diagrams/Images/Docker_PS_Output/Filebeat_data_successful.PNG)
+  - [Filebeat Module Status Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_data_successful.PNG)
 
 - Metricbeat
-  - [Metricbeat Module Status Screenshot](/Diagrams/Images/Docker_PS_Output/Metricbeat_data_successful.PNG)
+  - [Metricbeat Module Status Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_data_successful.PNG)
 
 These Beats allow us to collect the following information from each machine:
 
   - Filebeat will be used to collect log files from very specific files such as Apache, Microsft Azure tools and web servers, MySQL databases.
-    - [Filebeat Module Kibana Dashboard Screenshot](/Diagrams/Images/Docker_PS_Output/Filebeat_System_Syslog_dashboard.PNG) 
+    - [Filebeat Module Kibana Dashboard Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_System_Syslog_dashboard.PNG) 
 
   - Metericbeat will be used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats.
-    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Diagrams/Images/Docker_PS_Output/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Diagrams/Images/Docker_PS_Output/Metricbeat_Docker_Web-1_metrics.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/Docker_PS_Output/Metricbeat_Docker_Web-2_metrics.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/Docker_PS_Output/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
+    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-1_metrics.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-2_metrics.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
 
-## Using the Playbook
+## Using the Playbook  
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned:
 
 - Verify the Public IP address to see if it has changed. [What Is My IP?](https://www.whatismyip.com/)
@@ -213,7 +213,8 @@ setup.kibana:
   host: "10.2.0.4:5601" 
 # TODO: Change this to the IP address of your ELK server
 ```
-- Run the playbook using this command `ansible-playbook filebeat-playbook.yml` and navigate to [Kibana](http://20.84.136.248:5601/app/kibana) > Logs : Add log data > System logs > 5:Module Status > Check data_ to check that the installation worked as expected.
+- Run the playbook using this command `ansible-playbook filebeat-playbook.yml` and navigate to [Kibana](http://20.84.136.248:5601/app/kibana) > Logs : Add log data > System logs (DEB) > 5:Module Status > Check Incoming data on Kibana to check that the installation worked as expected.
+  - [Filebeat Module Kibana Dashboard Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_System_Syslog_dashboard.PNG) 
 
 ### **_For Metricbeat_**
 - Download Metricbeat playbook using this command:
@@ -237,29 +238,32 @@ output.elasticsearch:
   password: "changeme"
 
 ```
+- Run the playbook using this command `ansible-playbook metricbeat-playbook.yml` and navigate to [Kibana](http://20.84.136.248:5601/app/kibana) > Logs : Add Metric data > Docker Metrics (DEB) > 5:Module Status > Check data_on Kibana to check that the installation worked as expected.  
+    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-1_metrics.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-2_metrics.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
 
-
+- _Answer the following questions to fill in the blanks:_  
 - _Which file is the playbook?_
-  - **_[Filebeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_playbook.yml "Filebeat Playbook")_**
+  - **_[Filebeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Filebeat/filebeat_playbook.yml "Filebeat Playbook")_**  
 - _Where do you copy it?_
-  - **_/etc/ansible/_**
+  - **_/etc/ansible/_**  
 - _Which file do you update to make Ansible run the playbook on a specific machine?_
-  - 
+  - **_/etc/ansible/hosts file (IP of the Virtual Machines)._**  
 - _How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-  - 
+  - **_I have specified two separate groups in the etc/ansible/hosts file. One of the group will be webservers which has the IPs of the 3 VMs that I will install Filebeat to. The other group is named ELKserver which will have the IP of the VM I will install ELK to._**  
 - _Which URL do you navigate to in order to check that the ELK server is running?_
-  - 
+  - **_http://20.84.136.248:5601//app/kibana_**
 
-**_For Metricbeat_**
-- _Which file is the playbook?_
-  - **_[Metricbeat Playbook](https://github.com/karma-786/ELK-Stack-Project/blob/main/Ansible/Metricbeat/metricbeat-playbook.yml "Metricbeat Playbook")_**
-- _Where do you copy it?_
-  - **_/etc/ansible/roles/_**
-- _Which file do you update to make Ansible run the playbook on a specific machine?_
-  - **_
-- _How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-  - 
-- _Which URL do you navigate to in order to check that the ELK server is running?_
-  - 
+As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.  
 
-As a Bonus, provide the specific commands the user will need to run to download the playbook, update the files, etc.
+## Additional Notes:  
+- Make sure all the folders are organized for the Ansible Machine as following:
+- `etc # should already exist.
+  ----> ansible # should already exist.
+  ---------> ansible.cfg # should already exist.
+  ---------> hosts # should already exist.
+  ---------> roles # this is a new directory that will contain your ansible playbooks.
+  --------------> files # this is a new directory that will contain the configuration files we pass to you.`
+
