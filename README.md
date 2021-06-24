@@ -1,8 +1,9 @@
 ### KEtaN V. Patel -- ELK Stack Project  
 #### _June 16, 2021 -- UofT Cybersecurity - Boot Camp_  
 
-# Automated ELK Stack Deployment  
-The files in this repository were used to configure the network depicted below.
+Automated ELK Stack Deployment
+==============================
+The files in this repository were used to configure the network depicted below.  
 
 ![Network Diagram](/Diagrams/KVP_Cloud_Security_with_ELK_Deployment_Diagram.png)
 
@@ -146,9 +147,23 @@ The playbook implements the following tasks:
              -  5044:5044   
       ```
 
-The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
+The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.  
 
-![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_ELKserver.PNG)
+ELKserver
+---------
+![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_ELKserver.PNG "ELKserver")
+Jump-Box-Provisioner
+--------------------
+![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_Jump-Box-Provisioner.PNG "Jump-Box-Provisioner")
+Web-1
+-----
+![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_Web-1.PNG "Web-1")
+Web-2
+-----
+![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_Web-2.PNG "Web-2")
+DVWA-VM3
+--------
+![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_DVWA-VM3.PNG "DVWA-VM3")  
 
 ## Target Machines & Beats  
 This ELK server is configured to monitor the following machines:
@@ -161,21 +176,21 @@ This ELK server is configured to monitor the following machines:
 We have installed the following Beats on these machines:
 
 - Filebeat
-  - [Filebeat Module Status Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_data_successful.PNG)
+  - [Filebeat Module Status Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_data_successful.PNG "Filebeat Data Successful")
 
 - Metricbeat
-  - [Metricbeat Module Status Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_data_successful.PNG)
+  - [Metricbeat Module Status Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_data_successful.PNG "Metricbeat Data Successful")
 
 These Beats allow us to collect the following information from each machine:
 
   - Filebeat will be used to collect log files from very specific files such as Apache, Microsft Azure tools and web servers, MySQL databases.
-    - [Filebeat Module Kibana Dashboard Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_System_Syslog_dashboard.PNG) 
+    - [Filebeat Module Kibana Dashboard Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_System_Syslog_dashboard.PNG "Kibana Dashboard with Filebeat") 
 
   - Metericbeat will be used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats.
-    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-1_metrics.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-2_metrics.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
+    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Overview_ECS_dashboard.PNG "Kibana Dashboard with Metricbeat")
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-1_metrics.PNG "Metricbeat of Web-1")
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-2_metrics.PNG "Metricbeat of Web-2")
+      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_DVWA-VM3_metrics.PNG "Metricbeat of DVWA-VM3")  
 
 ## Using the Playbook  
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned:
@@ -218,7 +233,7 @@ setup.kibana:
 # TODO: Change this to the IP address of your ELK server
 ```
 - Run the playbook using this command `ansible-playbook filebeat-playbook.yml` and navigate to [Kibana](http://20.84.136.248:5601/app/kibana) > Logs : Add log data > System logs (DEB) > 5:Module Status > Check Incoming data on Kibana to check that the installation worked as expected.
-  - [Filebeat Module Kibana Dashboard Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_System_Syslog_dashboard.PNG) 
+  - [Filebeat Module Kibana Dashboard Screenshot](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Filebeat_System_Syslog_dashboard.PNG "Kibana Dashboard with Filebeat") 
 
 ### **_For Metricbeat_**
 - Download Metricbeat playbook using this command:
@@ -243,10 +258,10 @@ output.elasticsearch:
 
 ```
 - Run the playbook using this command `ansible-playbook metricbeat-playbook.yml` and navigate to [Kibana](http://20.84.136.248:5601/app/kibana) > Logs : Add Metric data > Docker Metrics (DEB) > 5:Module Status > Check data_on Kibana to check that the installation worked as expected.  
-    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-1_metrics.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-2_metrics.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
+    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Overview_ECS_dashboard.PNG "Kibana Dashboard with Metricbeat")
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-1_metrics.PNG "Metricbeat of Web-1")
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_Web-2_metrics.PNG "Metricbeat of Web-2")
+      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/ELK_VM_Configuration_Screenshots/Metricbeat_Docker_DVWA-VM3_metrics.PNG "Metricbeat of DVWA-VM3")
 
 ### Install Filebeat onto VM's
 1. Login to Kibana > Logs : Add log data > System logs > DEB > Getting started
