@@ -148,7 +148,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running docker ps after successfully configuring the ELK instance.
 
-![DockerPS](/Images/Docker_PS_Output/docker_ps_output_ELKserver.PNG)
+![DockerPS](/Diagrams/Images/Docker_PS_Output/docker_ps_output_ELKserver.PNG)
 
 ## Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -161,21 +161,21 @@ This ELK server is configured to monitor the following machines:
 We have installed the following Beats on these machines:
 
 - Filebeat
-  - [Filebeat Module Status Screenshot](/Images/Docker_PS_Output/Filebeat_data_successful.PNG)
+  - [Filebeat Module Status Screenshot](/Diagrams/Images/Docker_PS_Output/Filebeat_data_successful.PNG)
 
 - Metricbeat
-  - [Metricbeat Module Status Screenshot](/Images/Docker_PS_Output/Metricbeat_data_successful.PNG)
+  - [Metricbeat Module Status Screenshot](/Diagrams/Images/Docker_PS_Output/Metricbeat_data_successful.PNG)
 
 These Beats allow us to collect the following information from each machine:
 
   - Filebeat will be used to collect log files from very specific files such as Apache, Microsft Azure tools and web servers, MySQL databases.
-    - [Filebeat Module Kibana Dashboard Screenshot](/Images/Docker_PS_Output/Filebeat_System_Syslog_dashboard.PNG) 
+    - [Filebeat Module Kibana Dashboard Screenshot](/Diagrams/Images/Docker_PS_Output/Filebeat_System_Syslog_dashboard.PNG) 
 
   - Metericbeat will be used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats.
-    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Images/Docker_PS_Output/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_Web-1_metrics.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_Web-2_metrics.PNG)
-      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Images/Docker_PS_Output/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
+    - [Metricbeat Module Kibana - Metricbeat Docker Overview ECS Dashboard](/Diagrams/Images/Docker_PS_Output/Metricbeat_Docker_Overview_ECS_dashboard.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-1 metrics](/Diagrams/Images/Docker_PS_Output/Metricbeat_Docker_Web-1_metrics.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker Web-2 metrics](/Diagrams/Images/Docker_PS_Output/Metricbeat_Docker_Web-2_metrics.PNG)
+      - [Metricbeat Module Kibana - Metricbeat Docker DVWA-VM3 metrics](/Diagrams/Images/Docker_PS_Output/Metricbeat_Docker_DVWA-VM3_metrics.PNG)
 
 ## Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned:
