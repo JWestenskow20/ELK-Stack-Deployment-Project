@@ -303,29 +303,59 @@ As a **Bonus**, provide the specific commands the user will need to run to downl
 
 - The specific commands the user will need to run in order to download the playbook and configuration files, update the files, etc:  
 
-|            COMMAND                               | PURPOSE                                          |
-|--------------------------------------------------|--------------------------------------------------|                         
-|`sudo apt-get update` 				                     |  this will update all packages                   |         
-|`sudo apt install docker.io`				               |  install docker application		                  |   
-|`sudo service docker start`				               |  start the docker application                    |
-|`sudo systemctl status docker`				             |  status of the docker application                |
-|`sudo systemctl start docker`                     |  start the docker service                        |
-|`sudo docker pull cyberxsecurity/ansible`	       |  pull the docker container file                  |
-|`sudo docker run -ti cyberxsecurity/ansible bash` |  run and create a docker container image         |
-|`sudo docker start <image-name>`                  |  starts the image specified                      |
-|`sudo docker ps -a`                               |  list all active/inactive containers             |
-|`sudo docker attach <image-name>`                 |  effectively sshing into the ansible |container  |
-|`ssh-keygen`                                      |  create a ssh key                                |
-|`ansible -m ping all`                             |  check the connection of ansible containers      |
-|`ssh azadmin@Jump-Box-Provisioner IP address`     |  to log into the Jump-Box-Provisioner            |
-|`ssh ansible@Web-1 IP address`                    |  to log into the Web-1 VM                        |
-|`ssh ansible@Web-2 IP address`                    |  to log into the Web-2 VM                        |
-|`ssh ansible@DVWA-VM3 IP address`                 |  to log into the DVWA-VM3 VM                     |
-|`ssh ansible@ELKserver IP address`                |  to log into the ELKserver VM                    |
-|`nano /etc/ansible/ansible.cfg`                   |  to edit the ansible.cfg file                    |
-|`nano /etc/ansible/hosts`                         |  to edit the hosts file                          |
-|`nano /etc/ansible/pentest.yml`                   |  to edit the My-Playbook                         |
-|`curl -L -O [location of the file on the web]`    |  to download a file from the web                 |
-|`dpkg -i [filename]`                              |  to install the file i.e. (filebeat & metricbeat)|
-|`ansible-playbook [location][filename]`           |  to run the playbook                             |
+|            COMMAND                               | PURPOSE                                               |
+|--------------------------------------------------|-------------------------------------------------------|                         
+|`ssh-keygen`                                      |  create a ssh key for setup VM's                      |
+|`sudo cat .ssh/id_rsa.pub`                        |  to view the ssh public key                           |
+|`ssh azadmin@Jump-Box-Provisioner IP address`     |  to log into the Jump-Box-Provisioner                 |
+| `sudo docker container list -a`                  | list all docker containers                            |
+| `sudo docker start dremy_elbakyan`               | start docker container dremy_elbakyan                 |
+|`sudo docker ps -a`                               |  list all active/inactive containers                  |
+|`sudo docker attach dremy_elbakyan`               |  effectively sshing into the dremy_elbakyan container |
+|`cd /etc/ansible`                                 | Change directory to the Ansible directory             |
+|`ls -laA`                                         | List all file in directory (including hidden)         |
+|`nano /etc/ansible/hosts`                         |  to edit the hosts file                               |
+|`nano /etc/ansible/ansible.cfg`                   |  to edit the ansible.cfg file                         |
+|`nano /etc/ansible/pentest.yml`                   |  to edit the My-Playbook                              |
+|`ansible-playbook [location][filename]`           |  to run the playbook                                  |
+|`sudo lsof /var/lib/dpkg/lock-frontend`           | unlocking a locked file                               |
+|`ssh ansible@Web-1 IP address`                    |  to log into the Web-1 VM                             |
+|`ssh ansible@Web-2 IP address`                    |  to log into the Web-2 VM                             |
+|`ssh ansible@DVWA-VM3 IP address`                 |  to log into the DVWA-VM3 VM                          |
+|`ssh ansible@ELKserver IP address`                |  to log into the ELKserver VM                         |
+|`exit`                                            | to exit out of docker containers/Jump-Box-Provisioners|
+|`nano /etc/ansible/ansible.cfg`                   |  to edit the ansible.cfg file                         |
+|`nano /etc/ansible/hosts`                         |  to edit the hosts file                               |
+|`nano /etc/ansible/pentest.yml`                   |  to edit the My-Playbook                              |
+|`ansible-playbook [location][filename]`           |  to run the playbook                                  |
+|`sudo apt-get update` 				                     |  this will update all packages                        |
+|`sudo apt install docker.io`				               |  install docker application		                       |
+|`sudo service docker start`				               |  start the docker application                         |
+|`sudo systemctl status docker`				             |  status of the docker application                     |
+|`sudo systemctl start docker`                     |  start the docker service                             |
+|`sudo docker pull cyberxsecurity/ansible`	       |  pull the docker container file                       |
+|`sudo docker run -ti cyberxsecurity/ansible bash` |  run and create a docker container image              |
+|`ansible -m ping all`                             |  check the connection of ansible containers           |
+|`curl -L -O [location of the file on the web]`    |  to download a file from the web                      |
+|`dpkg -i [filename]`                              |  to install the file i.e. (filebeat & metricbeat)     |
+|`http://20.84.136.248:5601//app/kibana`           | Open web browser and navigate to Kibana Logs          |
+|`nano filebeat-config.yml`                        | create and edit filebeat config file                  |
+|`nano filebeat-playbook.yml`                      | write YAML file to install filebeat on webservers     |
+|`nano metricbeat-config.yml`                      | create metricbeat config file and edit it             |
+|`nano metricbeat-playbook.yml`                    | write YAML file to install metricbeat on webservers   |  
+------------------------------------------------------------------------------------------------------------
 
+### Sites Used for References and Knowledge for the Project  
+- [Elastic: The Elastic Stack.](https://www.elastic.co/elastic-stack "Elastic: The Elastic Stack.")
+- [Elastic: Filebeat.](https://www.elastic.co/beats/filebeat "Elastic: Filebeat.")
+- [ELK Docker Documentation.](https://elk-docker.readthedocs.io/ "ELK Docker Documentation.")
+- [Microsoft Azure: Global vNet Peering](https://azure.microsoft.com/en-ca/blog/global-vnet-peering-now-generally-available/ "Microsoft Azure: Global vNet Peering")
+- [Microsoft Docs: How to open a support ticket](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/how-to-create-azure-support-request "Microsoft Docs: How to open a support ticket")
+- [Peachpit.com: Split-Half Search](https://www.peachpit.com/articles/article.aspx?p=420908&seqNum=3 "Peachpit.com: Split-Half Search")
+- [Elastic: Filebeat Container Documentation](https://www.elastic.co/beats/filebeat "Elastic: Filebeat Container Documentation")
+- [Phoenixnap.com: Docker Commands Cheat Sheet](https://phoenixnap.com/kb/list-of-docker-commands-cheat-sheet "Phoenixnap.com: Docker Commands Cheat Sheet")
+- [Docker and Ansible Cloud Week Cheat Sheet](https://www.bogotobogo.com/DevOps/Docker/Docker-Cheat-Sheet.php "Docker and Ansible Cloud Week Cheat Sheet")
+- [Ansible: Roles Playbook Reuse Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html "Ansible: Roles Playbook Reuse Roles")
+- [Elastic: Getting Started with the Elastic Stack](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-elastic-stack.html "Elastic: Getting Started with the Elastic Stack")  
+-------------------------------------------------------------------------------------------------------------
+                                                                                                                                                            Jai Shri Swaminarayan
